@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <meta property="og:title" content="강태 ♡ 주연의 결혼식에 초대합니다">
-    <meta property="og:description" content="2027. 09. 05 낮 12시, 신라호텔 다이너스티 홀">
+    <meta property="og:description" content="드디어 결혼합니다. 꼭 오셔서 축하해주세요!">
     <meta property="og:image" content="https://kjsool4942.github.io/my-wedding/thumb.jpg">
     <meta property="og:url" content="https://kjsool4942.github.io/my-wedding/">
     <meta property="og:type" content="website">
@@ -13,21 +13,37 @@
     <title>강태 ♡ 주연의 결혼식</title>
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Nanum Myeongjo', serif; background: #f9f5f2; margin: 0; text-align: center; color: #444; }
-        .container { padding: 60px 20px; max-width: 450px; margin: auto; background: white; min-height: 100vh; }
+        body { font-family: 'Nanum Myeongjo', serif; background: #f9f5f2; margin: 0; text-align: center; color: #444; overflow-x: hidden; }
+        .container { padding: 60px 20px; max-width: 450px; margin: auto; background: white; min-height: 100vh; position: relative; }
         .header { letter-spacing: 3px; font-size: 0.9rem; color: #aaa; margin-bottom: 20px; }
         h1 { font-size: 1.8rem; margin: 10px 0; color: #555; }
         .names { font-size: 1.4rem; margin: 20px 0; font-weight: bold; }
-        .main-img { width: 100%; height: 450px; background: #eee url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1000&auto=format&fit=crop') center/cover; margin: 30px 0; }
-        .content { line-height: 2; margin: 40px 0; padding: 0 20px; word-break: keep-all; }
-        .info-box { border-top: 1px solid #eee; border-bottom: 1px solid #eee; padding: 30px 0; margin: 30px 0; }
-        .btn-group { display: flex; flex-direction: column; gap: 10px; align-items: center; }
-        .btn { width: 80%; padding: 15px; background: #bcaaa4; color: white; text-decoration: none; border-radius: 5px; cursor: pointer; border: none; font-family: inherit; font-size: 1rem; }
-        .btn-gold { background: #8d6e63; }
         
-        #prank-layer { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 9999; justify-content: center; align-items: center; flex-direction: column; }
-        .prank-msg { font-size: 5rem; margin: 0; }
-        .prank-text { font-size: 1.5rem; font-weight: bold; color: #e91e63; }
+        /* 메인 사진 스타일 (터치 영역) */
+        .main-img-wrapper { width: 100%; height: 450px; margin: 30px 0; position: relative; cursor: pointer; overflow: hidden; border-radius: 5px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .main-img { width: 100%; height: 100%; background: #eee url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1000&auto=format&fit=crop') center/cover; transition: transform 0.5s ease; }
+        .main-img-wrapper:hover .main-img { transform: scale(1.05); }
+        
+        /* 사진 위 안내 문구 스타일 (항상 중앙에 보이게 수정!) */
+        .img-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); /* 사진을 살짝 어둡게 해서 글자를 돋보이게 함 */ display: flex; justify-content: center; align-items: center; color: white; opacity: 1; /* 항상 보이게 설정 */ transition: opacity 0.3s ease; pointer-events: none; }
+        
+        /* 글자 스타일 (검은색 반투명 박스 추가) */
+        .img-overlay-box { background: rgba(0,0,0,0.6); padding: 15px 25px; border-radius: 30px; font-size: 1.2rem; font-weight: bold; text-shadow: 0 2px 4px rgba(0,0,0,0.5); display: flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+
+        .content { line-height: 2; margin: 40px 0; padding: 0 20px; word-break: keep-all; font-size: 1rem; }
+        .info-box { border-top: 1px solid #eee; border-bottom: 1px solid #eee; padding: 30px 0; margin: 30px 0; font-size: 1.1rem; }
+        
+        /* 하단 버튼 삭제 */
+        .btn-group { display: none; }
+        
+        /* 반전 레이어 (만우절 화면) */
+        #prank-layer { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 9999; justify-content: center; align-items: center; flex-direction: column; padding: 20px; box-sizing: border-box; }
+        .prank-msg { font-size: 6rem; margin: 0; animation: wobble 1s infinite; }
+        .prank-text { font-size: 1.8rem; font-weight: bold; color: #e91e63; margin: 20px 0; }
+        .prank-sub { font-size: 1.1rem; line-height: 1.6; margin-bottom: 30px; color: #555; }
+        .btn-close { width: 150px; padding: 15px; background: #bcaaa4; color: white; text-decoration: none; border-radius: 5px; cursor: pointer; border: none; font-family: inherit; font-size: 1rem; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+
+        @keyframes wobble { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px) rotate(-5deg); } 75% { transform: translateX(5px) rotate(5deg); } }
     </style>
 </head>
 <body>
@@ -37,7 +53,15 @@
     <h1>결 혼 합 니 다</h1>
     <div class="names">강 태 &nbsp;&nbsp;|&nbsp;&nbsp; 주 연</div>
     
-    <div class="main-img"></div>
+    <div class="main-img-wrapper" onclick="openPrank()">
+        <div class="main-img"></div>
+        <div class="img-overlay">
+            <div class="img-overlay-box">
+                <span>👆</span>
+                <span class="img-overlay-text">Touch! 더 많은 사진 보기</span>
+            </div>
+        </div>
+    </div>
 
     <div class="content">
         함께 있을 때 가장 나다워지는 사람을 만났습니다.<br>
@@ -49,26 +73,25 @@
         <strong>일시:</strong> 2027년 9월 5일 낮 12시<br>
         <strong>장소:</strong> 신라호텔 다이너스티 홀
     </div>
-
-    <div class="btn-group">
-        <button class="btn" onclick="openPrank()">오시는 길 안내 (카카오맵)</button>
-        <button class="btn btn-gold" onclick="openPrank()">신랑 & 신부에게 마음 전하기</button>
-    </div>
 </div>
 
 <div id="prank-layer">
     <p class="prank-msg">🐟</p>
     <p class="prank-text">만.우.절. 낚.이.셨.습.니.다!</p>
-    <p>강태와 주연이는 아직 갈 생각이 없답니다.<br>오늘 하루 많이 웃으시라고 보내드렸어요!</p>
-    <button class="btn" onclick="closePrank()" style="margin-top:20px; width:150px;">돌아가기</button>
+    <p class="prank-sub">강태와 주연이는 아직 갈 생각이 없답니다.<br>오늘 하루 많이 웃으시라고 보내드렸어요!</p>
+    <button class="btn-close" onclick="closePrank()">돌아가기</button>
 </div>
 
 <script>
     function openPrank() {
         document.getElementById('prank-layer').style.display = 'flex';
+        // 스크롤 방지
+        document.body.style.overflow = 'hidden';
     }
     function closePrank() {
         document.getElementById('prank-layer').style.display = 'none';
+        // 스크롤 허용
+        document.body.style.overflow = 'auto';
     }
 </script>
 
