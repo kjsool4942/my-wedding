@@ -28,4 +28,50 @@
         /* 반전 레이어 */
         #prank-layer { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 9999; justify-content: center; align-items: center; flex-direction: column; }
         .prank-msg { font-size: 5rem; margin: 0; }
-        .prank-text
+        .prank-text { font-size: 1.5rem; font-weight: bold; color: #e91e63; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">2026. 04. 01 / WEDNESDAY</div>
+    <h1>결 혼 합 니 다</h1>
+    <div class="names">강 태 &nbsp;&nbsp;|&nbsp;&nbsp; 주 연</div>
+    
+    <div class="main-img"></div>
+
+    <div class="content">
+        함께 있을 때 가장 나다워지는 사람을 만났습니다.<br>
+        서로의 부족함을 채워주며 아름답게 살겠습니다.<br>
+        저희의 앞날을 축복해 주십시오.
+    </div>
+
+    <div class="info-box">
+        <strong>일시:</strong> 2026년 4월 1일 낮 12시<br>
+        <strong>장소:</strong> 신라호텔 다이너스티 홀
+    </div>
+
+    <div class="btn-group">
+        <button class="btn" onclick="openPrank()">오시는 길 안내 (카카오맵)</button>
+        <button class="btn btn-gold" onclick="openPrank()">신랑 & 신부에게 마음 전하기</button>
+    </div>
+</div>
+
+<div id="prank-layer">
+    <p class="prank-msg">🐟</p>
+    <p class="prank-text">만.우.절. 낚.이.셨.습.니.다!</p>
+    <p>강태와 주연이는 아직 갈 생각이 없답니다.<br>오늘 하루 많이 웃으시라고 보내드렸어요!</p>
+    <button class="btn" onclick="closePrank()" style="margin-top:20px; width:150px;">돌아가기</button>
+</div>
+
+<script>
+    function openPrank() {
+        document.getElementById('prank-layer').style.display = 'flex';
+    }
+    function closePrank() {
+        document.getElementById('prank-layer').style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
